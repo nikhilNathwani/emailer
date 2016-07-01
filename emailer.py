@@ -28,6 +28,8 @@ html= """\
 </html>
 """
 
+print "Completed writing email!"
+
 #Record MIME types of both parts
 part1= MIMEText(text,'plain')
 part2= MIMEText(html,'html')
@@ -36,8 +38,13 @@ part2= MIMEText(html,'html')
 msg.attach(part1)
 msg.attach(part2)
 
+print "Attached to container!"
+
 #send message via local SMTP server
-s= smtplib.SMTP('localhost')
-s.sendmail(me,you.msg.as_string())
+s= smtplib.SMTP('localhost',1025)
+print "s initialized!"
+s.sendmail(me,you,msg.as_string())
 s.quit()
+
+print "Done!"
 
