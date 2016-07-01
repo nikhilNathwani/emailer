@@ -4,7 +4,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
 #sender and recipient
-me= "nikhilna@microsoft.com"
+me= "collabxchat@microsoft.com"
 you= "njn27@cornell.edu"
 
 #message container
@@ -21,7 +21,7 @@ html= """\
 	<head></head>
 	<body>
 		<p>Hi!<br>
-			How are you?<br>
+			<em>How are you?</em><br>
 			Here is the <a href="https://www.python.org">link</a> you wanted.
 		</p>
 	</body>
@@ -41,10 +41,15 @@ msg.attach(part2)
 print "Attached to container!"
 
 #send message via local SMTP server
-s= smtplib.SMTP('localhost',1025)
-print "s initialized!"
-s.sendmail(me,you,msg.as_string())
-s.quit()
+mail = smtplib.SMTP('smtp.office365.com', 587)
+
+#mail.ehlo()
+
+mail.starttls()
+
+#mail.login('nikhilna@microsoft.com', 'xxxxxxx')
+mail.sendmail(me, you, msg.as_string())
+mail.quit()
 
 print "Done!"
 
